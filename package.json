@@ -1,7 +1,8 @@
 {
   "name": "task-env",
   "version": "0.0.1",
-  "description": "A framework for writing tasks that execute commands and persist encrypted state aynchronously",
+  "description":
+    "A framework for writing tasks that execute commands and persist encrypted state aynchronously",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
@@ -15,21 +16,13 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/invrs/task-env.git"
   },
-  "keywords": [
-    "task",
-    "exec",
-    "cli",
-    "git-crypt"
-  ],
+  "keywords": ["task", "exec", "cli", "git-crypt"],
   "author": "Winton Welsh <winton@cyclo.ps>",
   "license": "MIT",
   "bugs": {
@@ -42,7 +35,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-node6": "^11.0.0",
-    "husky": "^0.14.3",
+    "husky": "^0.15.0-rc.3",
     "jest": "^22.1.4",
     "lint-staged": "^6.0.1",
     "prettier": "^1.10.2",
