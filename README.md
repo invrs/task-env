@@ -8,7 +8,10 @@ A framework for writing tasks that execute commands and persist encrypted state 
 npm install --save task-env
 ```
 
-Task env also relies on [git-crypt](https://github.com/AGWA/git-crypt) and [GPG Suite](https://gpgtools.org) to save state.
+Other dependencies:
+
+* [git-crypt](https://github.com/AGWA/git-crypt) (`brew install git-crypt`)
+* [GPG Suite](https://gpgtools.org) (manual download)
 
 ## Create task runner
 
@@ -17,22 +20,20 @@ touch run
 chmod +x run
 ```
 
-## Edit task runner
+Now edit the `run` file you created:
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")
   .cli(process.argv.slice(2))
-  .catch(console.error)
+  .catch(console.error);
 ```
 
-## Create GPG user
+## Create secrets
 
 1. Open `GPG Keychain`, click "new"
 2. Enter name and email, advanced options: "RSA and RSA" and "4096"
-
-## Create secrets
 
 ```bash
 ./run secrets -e "your.gpg@email.com"
@@ -54,5 +55,5 @@ Then in your task runner:
 require("task-env")
   .tasks(require("ops-tasks"))
   .cli(process.argv.slice(2))
-  .catch(console.error)
+  .catch(console.error);
 ```
