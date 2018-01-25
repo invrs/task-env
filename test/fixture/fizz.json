@@ -1,1 +1,6 @@
-{ "fizz": {} }
+{
+  ">>? condition": {
+    "condition": true
+  },
+  "fizz": {}
+}
