@@ -20,7 +20,7 @@ touch run
 chmod +x run
 ```
 
-Now edit the `run` file you created:
+Edit the file you created:
 
 ```js
 #!/usr/bin/env node
@@ -28,7 +28,7 @@ Now edit the `run` file you created:
 require("task-env")({
   args: process.argv.slice(2),
   dir: __dirname,
-}).catch(console.error)
+})
 ```
 
 ## Create secrets
@@ -57,7 +57,7 @@ require("task-env")({
   args: process.argv.slice(2),
   dir: __dirname,
   tasks: require("ops-tasks"),
-}).catch(console.error)
+})
 ```
 
 ## Extra options
@@ -76,7 +76,7 @@ require("task-env")({
   setup: ({ help }) => {
     if (help) console.log("help!")
   },
-}).catch(console.error)
+})
 ```
 
 ## Writing tasks
@@ -86,12 +86,13 @@ A task function receives the CLI options and two functions (`get` and `set`):
 ```js
 export function myTask({ hello, get, set }) {
   let value = get("verbs.hello")
+
   if (!value && hello) {
     set("verbs.hello", hello)
   }
 }
 ```
 
-The config functions use [`structured-json`](https://github.com/invrs/structured-json) to parse JSON and [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to find and update config values asynchronously.
+The `get` and `set` functions use [`structured-json`](https://github.com/invrs/structured-json) to parse JSON and [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to change state.
 
 Configuration JSON lives in `./secrets/config` and can be split into multiple files.
