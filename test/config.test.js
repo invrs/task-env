@@ -1,11 +1,19 @@
-import { resolve } from "path"
-import { load } from "../lib/config"
+import { readdir, readFile, writeFile } from "fs"
+import { promisify } from "util"
+
+import { load, write } from "../lib/config"
+import {
+  jsonDir,
+  readFixture,
+  readFixtures,
+  writeFixtures,
+} from "./fixtures"
 
 test("load", async () => {
   let config = {}
   let { json, jsonMap } = await load({
     config,
-    jsonDir: resolve(__dirname, "./fixture"),
+    jsonDir: jsonDir,
   })
   expect(config).toEqual({
     default: { bang: {}, buzz: {}, fizz: {} },
@@ -28,7 +36,7 @@ test("load w/ conditions", async () => {
   let { json, jsonMap } = await load({
     config,
     conditions: ["condition"],
-    jsonDir: resolve(__dirname, "./fixture"),
+    jsonDir,
   })
   expect(config).toEqual({
     condition: {
@@ -50,4 +58,30 @@ test("load w/ conditions", async () => {
     "buzz.json": ["buzz"],
     "fizz.json": [">>? condition", "fizz"],
   })
+})
+
+test("write", async () => {
+  let { fixtures, fixturePaths } = await readFixtures()
+
+  let json = { buzz: { written: true } }
+  let jsonMap = {
+    "bang.json": ["bang"],
+    "buzz.json": ["buzz"],
+    "fizz.json": [">>? condition", "fizz"],
+  }
+
+  let buzz = await readFixture("buzz")
+  expect(buzz).toEqual({ buzz: {} })
+
+  await write({
+    json,
+    jsonDir,
+    jsonMap,
+    props: "buzz.written",
+  })
+
+  buzz = await readFixture("buzz")
+  expect(buzz).toEqual({ buzz: { written: true } })
+
+  writeFixtures({ fixtures, fixturePaths })
 })
