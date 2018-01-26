@@ -1,6 +1,3 @@
-import { readdir, readFile, writeFile } from "fs"
-import { promisify } from "util"
-
 import { load, write } from "../lib/config"
 import {
   jsonDir,
