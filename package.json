@@ -2,7 +2,7 @@
   "name": "task-env",
   "version": "0.0.1",
   "description":
-    "A framework for writing tasks that execute commands and persist encrypted state aynchronously",
+    "A framework for building reusable JS tasks",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/invrs/task-env.git"
   },
-  "keywords": ["task", "exec", "cli", "git-crypt"],
+  "keywords": ["task", "exec", "cli", "json", "store"],
   "author": "Winton Welsh <winton@cyclo.ps>",
   "license": "MIT",
   "bugs": {
@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "camel-dot-prop-immutable": "^1.1.0",
+    "commandland": "0.0.8",
     "mri": "^1.1.0",
     "structured-json": "^2.2.0"
   }

@@ -2,7 +2,7 @@
 
 A framework for building reusable JS tasks.
 
-* Run commands with precise stdin/stdout control
+* Run commands with precise stdin/stdout control ([commandland](../commandland))
 * Human-readable JSON store ([Structured JSON](../structured-json) + [camel-dot-prop-immutable](../camel-dot-prop-immutable))
 
 ## Install
@@ -43,7 +43,7 @@ require("task-env")({
 
 ## Package tasks
 
-Export task `Functions`:
+Export task functions:
 
 ```js
 export function myTask({ hello }) {
@@ -51,7 +51,7 @@ export function myTask({ hello }) {
 }
 ```
 
-Add `Functions` to `tasks` option `Array`:
+Add functions to `tasks` option `Array`:
 
 ```js
 #!/usr/bin/env node
@@ -89,8 +89,8 @@ It is important to remember that `get` reads **parsed** [Structured JSON](https:
 * `alias` — `Object` with argument/aliases as key/value
 * `conditions` — `Array` of [Structured JSON](../structured-json) condition `Strings`
 * `jsonDir` — JSON store directory path `String`
-* `setup` — `Array` of `Functions` to run before task
-* `teardown` — `Array` of `Functions` to run after task
+* `setup` — `Array` of functions to run before task
+* `teardown` — `Array` of functions to run after task
 * `tasks` - `Array` of `Objects` with task name/function as key/value
 
 ```js
