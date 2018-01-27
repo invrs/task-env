@@ -5,101 +5,68 @@ A framework for building reusable JS tasks.
 * Run commands with precise stdin/stdout control
 * Human-readable JSON store ([Structured JSON](../structured-json) + [camel-dot-prop-immutable](../camel-dot-prop-immutable))
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-* [Install](#install)
-* [Create task runner](#create-task-runner)
-* [Create secrets](#create-secrets)
-* [Add tasks](#add-tasks)
-* [More options](#more-options)
-* [Writing tasks](#writing-tasks)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Install
 
 ```bash
-npm install --save task-env
+npm install --save-dev task-env
 ```
 
-Other dependencies:
-
-* [git-crypt](https://github.com/AGWA/git-crypt) (`brew install git-crypt`)
-* [GPG Suite](https://gpgtools.org) (manual download)
-
-## Create task runner
+## Create an executable
 
 ```bash
 touch run
 chmod +x run
 ```
 
-Edit the file you created:
+## Write some code
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
   args: process.argv.slice(2),
-  dir: __dirname,
-})
-```
-
-## Create secrets
-
-1. Open `GPG Keychain`, click "new"
-2. Enter name and email, advanced options: "RSA and RSA" and "4096"
-
-```bash
-./run secrets -e "your.gpg@email.com"
-```
-
-## Add tasks
-
-To add task packages (such as [`ops-tasks`](/invrs/ops-tasks)):
-
-```bash
-npm install --save ops-tasks
-```
-
-Then in your task runner:
-
-```js
-#!/usr/bin/env node
-
-require("task-env")({
-  args: process.argv.slice(2),
-  dir: __dirname,
-  tasks: require("ops-tasks"),
-})
-```
-
-## More options
-
-* `alias` — CLI option aliases
-* `setup` — Functions to run before task
-* `teardown` — Functions to run after task
-
-```js
-#!/usr/bin/env node
-
-require("task-env")({
-  alias: { h: "help" },
-  args: process.argv.slice(2),
-  dir: __dirname,
-  setup: [
-    ({ help }) => {
-      if (help) console.log("help!")
+  tasks: [
+    {
+      myTask: ({ hello }) => {
+        console.log(hello)
+      },
     },
   ],
 })
 ```
 
-## Writing tasks
+## Run your task
 
-A task function receives the CLI options and two functions (`get` and `set`):
+```bash
+./run my.task --hello=hi
+```
+
+## Package tasks
+
+Export task `Functions`:
+
+```js
+export function myTask({ hello }) {
+  console.log(hello)
+}
+```
+
+Add functions to `tasks` option `Array`:
+
+```js
+#!/usr/bin/env node
+
+require("task-env")({
+  args: process.argv.slice(2),
+  tasks: [require("./my-task")],
+})
+```
+
+## JSON store
+
+The `jsonDir` option specifies a directory of JSON files to use as a dynamic store.
+
+Task functions receive a getter/setter:
 
 ```js
 export function myTask({ hello, get, set }) {
@@ -111,6 +78,30 @@ export function myTask({ hello, get, set }) {
 }
 ```
 
-The `get` and `set` functions use [`structured-json`](https://github.com/invrs/structured-json) to parse JSON and [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to change state.
+The `get` function uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to access the JSON parsed with [Structured JSON](https://github.com/invrs/structured-json).
 
-Configuration JSON lives in `./secrets/config` and can be split into multiple files.
+The `set` function also uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to immutably write the store and then writes it to the JSON file.
+
+## All options
+
+* `alias` — `Object` with argument/aliases as key/value
+* `conditions` — `Array` of [Structured JSON](../structured-json) condition `Strings`
+* `jsonDir` — JSON store directory path `String`
+* `setup` — `Array` of `Functions` to run before task
+* `teardown` — `Array` of `Functions` to run after task
+* `tasks` - `Array` of `Objects` with task name/function as key/value
+
+```js
+#!/usr/bin/env node
+
+require("task-env")({
+  alias: { h: "help" },
+  args: process.argv.slice(2),
+  jsonDir: `${__dirname}/config`,
+  setup: [
+    ({ help }) => {
+      if (help) console.log("help!")
+    },
+  ],
+})
+```
