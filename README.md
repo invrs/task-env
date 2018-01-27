@@ -3,7 +3,7 @@
 A framework for building reusable JS tasks.
 
 * Run commands with precise stdin/stdout control <br/>
-  (via [commandland](https://github.com/invrs/commandland))
+  (via [commandland](https://github.com/winton/commandland))
 * Human-readable JSON store <br/>
   (via [Structured JSON](https://github.com/invrs/structured-json) and [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable))
 
