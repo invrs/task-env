@@ -4,7 +4,7 @@ import {
   readFixture,
   readFixtures,
   writeFixtures,
-} from "./fixtures"
+} from "./helpers/fixture"
 
 test("load", async () => {
   let config = {}
@@ -58,7 +58,7 @@ test("load w/ conditions", async () => {
 })
 
 test("write", async () => {
-  let { fixtures, fixturePaths } = await readFixtures()
+  let fixtures = await readFixtures()
 
   let json = { buzz: { written: true } }
   let jsonMap = {
@@ -80,5 +80,5 @@ test("write", async () => {
   buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: { written: true } })
 
-  writeFixtures({ fixtures, fixturePaths })
+  writeFixtures(fixtures)
 })
