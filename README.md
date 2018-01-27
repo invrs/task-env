@@ -51,7 +51,7 @@ export function myTask({ hello }) {
 }
 ```
 
-Add functions to `tasks` option `Array`:
+Add `Functions` to `tasks` option `Array`:
 
 ```js
 #!/usr/bin/env node
