@@ -2,8 +2,10 @@
 
 A framework for building reusable JS tasks.
 
-* Run commands with precise stdin/stdout control ([commandland](github.com/invrs/commandland))
-* Human-readable JSON store ([Structured JSON](github.com/invrs/structured-json) + [camel-dot-prop-immutable](github.com/invrs/camel-dot-prop-immutable))
+* Run commands with precise stdin/stdout control <br/>
+  (via [commandland](https://github.com/invrs/commandland))
+* Human-readable JSON store <br/>
+  (via [Structured JSON](https://github.com/invrs/structured-json) and [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable))
 
 ## Install
 
@@ -87,7 +89,7 @@ It is important to remember that `get` reads **parsed** [Structured JSON](https:
 ## All options
 
 * `alias` — `Object` with argument/aliases as key/value
-* `conditions` — `Array` of [Structured JSON](github.com/invrs/structured-json) condition `Strings`
+* `conditions` — `Array` of [Structured JSON](https://github.com/invrs/structured-json) condition `Strings`
 * `jsonDir` — JSON store directory path `String`
 * `setup` — `Array` of functions to run before task
 * `teardown` — `Array` of functions to run after task
