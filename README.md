@@ -1,6 +1,22 @@
 # Task Env
 
-A framework for writing tasks that execute commands and persist encrypted state aynchronously.
+A framework for building reusable JS tasks.
+
+* Run commands with precise stdin/stdout control
+* Human-readable JSON store ([Structured JSON](../structured-json) + [camel-dot-prop-immutable](../camel-dot-prop-immutable))
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+* [Install](#install)
+* [Create task runner](#create-task-runner)
+* [Create secrets](#create-secrets)
+* [Add tasks](#add-tasks)
+* [More options](#more-options)
+* [Writing tasks](#writing-tasks)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Install
 
@@ -60,11 +76,11 @@ require("task-env")({
 })
 ```
 
-## Extra options
+## More options
 
 * `alias` — CLI option aliases
-* `setup` — Function to run before task
-* `teardown` — Function to run after task
+* `setup` — Functions to run before task
+* `teardown` — Functions to run after task
 
 ```js
 #!/usr/bin/env node
@@ -73,9 +89,11 @@ require("task-env")({
   alias: { h: "help" },
   args: process.argv.slice(2),
   dir: __dirname,
-  setup: ({ help }) => {
-    if (help) console.log("help!")
-  },
+  setup: [
+    ({ help }) => {
+      if (help) console.log("help!")
+    },
+  ],
 })
 ```
 

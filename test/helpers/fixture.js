@@ -20,8 +20,8 @@ export async function readFixtures() {
   return { fixtureJson, fixturePaths }
 }
 
-export async function readFixture(fixture) {
-  let path = resolve(jsonDir, `${fixture}.json`)
+export async function readFixture(basename) {
+  let path = resolve(jsonDir, `${basename}.json`)
   let json = await promisify(readFile)(path)
 
   return JSON.parse(json)

@@ -16,10 +16,16 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write --print-width=60 --no-semi --trailing-comma=es5",
+    "*.{json,css,md}": ["prettier --write", "git add"],
+    "*.js": [
+      "eslint --ignore-path .gitignore --fix",
       "git add"
     ]
+  },
+  "prettier": {
+    "printWidth": 60,
+    "semi": false,
+    "trailingComma": "es5"
   },
   "repository": {
     "type": "git",
@@ -38,6 +44,10 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-node6": "^11.0.0",
+    "doctoc": "^1.3.0",
+    "eslint": "^4.16.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.5.0",
     "husky": "^0.15.0-rc.3",
     "jest": "^22.1.4",
     "lint-staged": "^6.0.1",
