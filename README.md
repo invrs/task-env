@@ -80,7 +80,9 @@ export function myTask({ hello, get, set }) {
 
 The `get` function uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to access the JSON parsed with [Structured JSON](https://github.com/invrs/structured-json).
 
-The `set` function also uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to immutably write the store and then writes it to the JSON file.
+The `set` function also uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to immutably write the unparsed store and the JSON file.
+
+It is important to remember that `get` reads **parsed** [Structured JSON](https://github.com/invrs/structured-json) and `set` writes to the **unparsed** JSON structure.
 
 ## All options
 
