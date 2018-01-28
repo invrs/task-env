@@ -114,11 +114,11 @@ Update the key via CLI:
 
 ## All options
 
-| Option     | Example                       | Purpose                                                                       |
-| ---------- | ----------------------------- | ----------------------------------------------------------------------------- |
-| alias      | `{ h: [ "help" ] }`           | CLI arguments aliases                                                         |
-| conditions | `[ "staging", "production" ]` | [structured-json](https://github.com/invrs/structured-json#readme) conditions |
-| jsonDir    | `__dirname + "/config"`       | Path to directory of JSON                                                     |
-| setup      | `[()=>{}]`                    | Setup functions                                                               |
-| teardown   | `[()=>{}]`                    | Teardown functions                                                            |
-| tasks      | `[{ task: ()=>{} }]`          | Task functions                                                                |
+| Option     | Example                     | Purpose                                                                              |
+| ---------- | --------------------------- | ------------------------------------------------------------------------------------ |
+| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                                |
+| conditions | `["staging", "production"]` | [structured-json conditions](hhttps://github.com/invrs/structured-json#conditionals) |
+| jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                            |
+| setup      | `[()=>{}]`                  | Setup functions                                                                      |
+| teardown   | `[()=>{}]`                  | Teardown functions                                                                   |
+| tasks      | `[{ task: ()=>{} }]`        | Task functions                                                                       |
