@@ -32,7 +32,7 @@ require("task-env")({
   args: process.argv.slice(2),
   tasks: [
     {
-      myTask: ({ hello }) => {
+      sayHello: ({ hello }) => {
         console.log(hello)
       },
     },
@@ -43,72 +43,81 @@ require("task-env")({
 ## Run your task
 
 ```bash
-./run my.task --hello=hi
+./run say.hello --hello=hi
 ```
 
 ## Package tasks
 
-Export task functions:
+Export task:
 
 ```js
-export function myTask({ hello }) {
+export function sayHello({ hello }) {
   console.log(hello)
 }
 ```
 
-Add functions to `tasks` option `Array`:
+Require task:
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
   args: process.argv.slice(2),
-  tasks: [require("./my-task")],
+  tasks: [require("./say-hello")],
 })
 ```
 
 ## JSON store
 
-The `jsonDir` option specifies a directory of JSON files to use as a dynamic store.
-
-Task functions receive a getter/setter:
-
-```js
-export function myTask({ hello, get, set }) {
-  let value = get("verbs.hello")
-
-  if (!value && hello) {
-    set("verbs.hello", hello)
-  }
-}
-```
-
-The `get` function uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to access the JSON parsed with [Structured JSON](https://github.com/invrs/structured-json).
-
-The `set` function also uses [`camel-dot-prop-immutable`](https://github.com/invrs/camel-dot-prop-immutable) to immutably write to the unparsed store and the JSON file.
-
-It is important to remember that `get` reads **parsed** [Structured JSON](https://github.com/invrs/structured-json) and `set` writes to the **unparsed** JSON structure.
-
-## All options
-
-* `alias` — `Object` with argument/aliases as key/value
-* `conditions` — `Array` of [Structured JSON](https://github.com/invrs/structured-json) condition `Strings`
-* `jsonDir` — JSON store directory path `String`
-* `setup` — `Array` of functions to run before task
-* `teardown` — `Array` of functions to run after task
-* `tasks` - `Array` of `Objects` with task name/function as key/value
+Given a directory of JSON files:
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
-  alias: { h: "help" },
   args: process.argv.slice(2),
-  jsonDir: `${__dirname}/config`,
-  setup: [
-    ({ help }) => {
-      if (help) console.log("help!")
-    },
-  ],
+  jsonDir: __dirname + "/config",
 })
 ```
+
+And a JSON file:
+
+```json
+{
+  "users": {
+    "bob": {
+      key: "~/.ssh/bob_rsa"
+    }
+  }
+}
+```
+
+Get and set JSON using property locator strings:
+
+```js
+export function user({ name, key, get, set }) {
+  if (key) {
+    set(`users.${name}.key`, key)
+  }
+
+  console.log(">", get(`users.${name}`))
+}
+```
+
+Update the key via CLI:
+
+```bash
+./run user --name=bob --key=~/.ssh/id_rsa
+> { key: "~/.ssh/id_rsa" }
+```
+
+## All options
+
+| Option     | Value                            | Purpose                                                                       |
+| ---------- | -------------------------------- | ----------------------------------------------------------------------------- |
+| alias      | `{ argument: [ "alias" ] }`      | CLI arguments aliases                                                         |
+| conditions | `[ "condition1", "condition2" ]` | [structured-json](https://github.com/invrs/structured-json#readme) conditions |
+| jsonDir    | `__dirname + "/config"`          | Path to directory of JSON                                                     |
+| setup      | `[()=>{}]`                       | Setup functions                                                               |
+| teardown   | `[()=>{}]`                       | Teardown functions                                                            |
+| tasks      | `[{ task: ()=>{} }]`             | Task functions                                                                |
