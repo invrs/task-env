@@ -87,7 +87,7 @@ And a JSON file:
 {
   "users": {
     "bob": {
-      key: "~/.ssh/bob_rsa"
+      "key": "~/.ssh/bob_rsa"
     }
   }
 }
@@ -114,11 +114,11 @@ Update the key via CLI:
 
 ## All options
 
-| Option     | Value                            | Purpose                                                                       |
-| ---------- | -------------------------------- | ----------------------------------------------------------------------------- |
-| alias      | `{ argument: [ "alias" ] }`      | CLI arguments aliases                                                         |
-| conditions | `[ "condition1", "condition2" ]` | [structured-json](https://github.com/invrs/structured-json#readme) conditions |
-| jsonDir    | `__dirname + "/config"`          | Path to directory of JSON                                                     |
-| setup      | `[()=>{}]`                       | Setup functions                                                               |
-| teardown   | `[()=>{}]`                       | Teardown functions                                                            |
-| tasks      | `[{ task: ()=>{} }]`             | Task functions                                                                |
+| Option     | Example                       | Purpose                                                                       |
+| ---------- | ----------------------------- | ----------------------------------------------------------------------------- |
+| alias      | `{ h: [ "help" ] }`           | CLI arguments aliases                                                         |
+| conditions | `[ "staging", "production" ]` | [structured-json](https://github.com/invrs/structured-json#readme) conditions |
+| jsonDir    | `__dirname + "/config"`       | Path to directory of JSON                                                     |
+| setup      | `[()=>{}]`                    | Setup functions                                                               |
+| teardown   | `[()=>{}]`                    | Teardown functions                                                            |
+| tasks      | `[{ task: ()=>{} }]`          | Task functions                                                                |
