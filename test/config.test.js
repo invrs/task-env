@@ -1,4 +1,4 @@
-import { load, write } from "../lib/config"
+import { getter, setter, load, write } from "../lib/config"
 import {
   jsonDir,
   readFixture,
@@ -10,7 +10,7 @@ test("load", async () => {
   let config = {}
   let { json, jsonMap } = await load({
     config,
-    jsonDir: jsonDir,
+    jsonDir,
   })
   expect(config).toEqual({
     default: { bang: {}, buzz: {}, fizz: {} },
@@ -59,13 +59,9 @@ test("load w/ conditions", async () => {
 
 test("write", async () => {
   let fixtures = await readFixtures()
+  let { json, jsonMap } = fixtures
 
-  let json = { buzz: { written: true } }
-  let jsonMap = {
-    "bang.json": ["bang"],
-    "buzz.json": ["buzz"],
-    "fizz.json": [">>? condition", "fizz"],
-  }
+  json.buzz.written = true
 
   let buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: {} })
@@ -78,6 +74,36 @@ test("write", async () => {
   })
 
   buzz = await readFixture("buzz")
+  expect(buzz).toEqual({ buzz: { written: true } })
+
+  writeFixtures(fixtures)
+})
+
+test("getter", () => {
+  let config = {
+    default: {
+      fizzBang: { buzz: true },
+    },
+  }
+  let get = getter(config)
+  expect(get("fizz.bang.buzz")).toBe(true)
+})
+
+test("setter", async () => {
+  let config = {}
+  let fixtures = await readFixtures()
+  let { json, jsonMap } = fixtures
+
+  let set = setter({
+    config,
+    json,
+    jsonDir,
+    jsonMap,
+  })
+
+  await set("buzz.written", true)
+
+  let buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: { written: true } })
 
   writeFixtures(fixtures)

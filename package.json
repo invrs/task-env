@@ -55,7 +55,7 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
-    "camel-dot-prop-immutable": "^1.1.0",
+    "camel-dot-prop-immutable": "^1.2.0",
     "commandland": "0.0.8",
     "graceful-fs": "^4.1.11",
     "mri": "^1.1.0",

@@ -1,15 +1,18 @@
-import { readdir, readFile, writeFile } from "fs"
+import { readFile, writeFile } from "fs"
 import { resolve } from "path"
 import { promisify } from "util"
+
+import { dirToJson } from "../../lib/config"
 
 export const jsonDir = resolve(__dirname, "../fixture")
 
 export async function readFixtures() {
-  let basenames = await promisify(readdir)(jsonDir)
+  let { json, jsonMap } = await dirToJson(jsonDir)
+
   let fixtureJson = {}
   let fixturePaths = {}
 
-  for (let basename of basenames) {
+  for (let basename in jsonMap) {
     let path = resolve(jsonDir, basename)
     let json = await promisify(readFile)(path)
 
@@ -17,7 +20,7 @@ export async function readFixtures() {
     fixturePaths[basename] = path
   }
 
-  return { fixtureJson, fixturePaths }
+  return { fixtureJson, fixturePaths, json, jsonMap }
 }
 
 export async function readFixture(basename) {

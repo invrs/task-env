@@ -81,7 +81,7 @@ require("task-env")({
 })
 ```
 
-And a JSON file:
+Example JSON file:
 
 ```json
 {
