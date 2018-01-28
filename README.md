@@ -2,7 +2,7 @@
 
 A framework for building reusable JS tasks.
 
-| Feature              | Components                                                                                                             |
+| Feature              | Built With                                                                                                             |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Parse CLI arguments  | [mri](https://github.com/lukeed/mri#readme)                                                                            |
 | Execute commands     | [commandland](https://github.com/winton/commandland#readme)                                                            |
@@ -119,6 +119,6 @@ Update the key via CLI:
 | alias      | `{h: ["help"]}`             | CLI arguments aliases                                                                |
 | conditions | `["staging", "production"]` | [structured-json conditions](hhttps://github.com/invrs/structured-json#conditionals) |
 | jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                            |
-| setup      | `[()=>{}]`                  | Setup functions                                                                      |
-| teardown   | `[()=>{}]`                  | Teardown functions                                                                   |
-| tasks      | `[{ task: ()=>{} }]`        | Task functions                                                                       |
+| setup      | `[({})=>{}]`                | Setup functions                                                                      |
+| teardown   | `[({})=>{}]`                | Teardown functions                                                                   |
+| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                       |
