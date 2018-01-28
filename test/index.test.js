@@ -1,5 +1,4 @@
 import taskEnv from "../lib"
-
 import {
   jsonDir,
   readFixtures,
@@ -27,6 +26,27 @@ test("task w/ aliased args", async () => {
   })
 })
 
+test("task w/ setup", async () => {
+  expect.assertions(3)
+  await taskEnv({
+    args: ["task", "-h"],
+    setup: [
+      args => {
+        expect(args.h).toBe(true)
+        args.help = true
+      },
+    ],
+    tasks: [
+      {
+        task: ({ h, help }) => {
+          expect(h).toBe(true)
+          expect(help).toBe(true)
+        },
+      },
+    ],
+  })
+})
+
 test("task w/ get and set", async () => {
   let fixtures = await readFixtures()
 
@@ -42,11 +62,8 @@ test("task w/ get and set", async () => {
           expect(get("fizz.condition", "condition")).toBe(
             true
           )
-
           expect(get("fizz.condition")).toBe(undefined)
-
           await set("buzz.written", true)
-
           expect(get("buzz.written")).toBe(true)
         },
       },
