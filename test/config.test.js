@@ -31,8 +31,8 @@ test("load", async () => {
 test("load w/ conditions", async () => {
   let config = {}
   let { json, jsonMap } = await load({
-    config,
     conditions: ["condition"],
+    config,
     jsonDir,
   })
   expect(config).toEqual({
