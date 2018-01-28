@@ -33,7 +33,7 @@ require("task-env")({
   tasks: [
     {
       sayHello: ({ hello }) => {
-        console.log(hello)
+        console.log(">", hello)
       },
     },
   ],
@@ -44,6 +44,7 @@ require("task-env")({
 
 ```bash
 ./run say.hello --hello=hi
+> hi
 ```
 
 ## Package tasks
