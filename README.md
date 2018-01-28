@@ -2,13 +2,13 @@
 
 A framework for building reusable JS tasks.
 
-| Feature              | Built With                                                                                                             |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Parse CLI arguments  | [mri](https://github.com/lukeed/mri#readme)                                                                            |
-| Execute commands     | [commandland](https://github.com/winton/commandland#readme)                                                            |
-| Readable JSON store  | [structured-json](https://github.com/invrs/structured-json#readme)                                                     |
-| Immutable JSON store | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
-| Resilient JSON store | [steno](https://github.com/typicode/steno#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
+| Feature                                 | Built With                                                                                                             |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [Parse CLI arguments](#write-some-code) | [mri](https://github.com/lukeed/mri#readme)                                                                            |
+| [Execute commands](#execute-commands)   | [commandland](https://github.com/winton/commandland#readme)                                                            |
+| Readable [JSON store](#json-store)      | [structured-json](https://github.com/invrs/structured-json#readme)                                                     |
+| Immutable [JSON store](#json-store)     | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
+| Resilient [JSON store](#json-store)     | [steno](https://github.com/typicode/steno#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
 
 ## Install
 
@@ -68,20 +68,19 @@ require("task-env")({
 })
 ```
 
-## JSON store
-
-Specify a directory of JSON files:
+## Execute commands
 
 ```js
-#!/usr/bin/env node
-
-require("task-env")({
-  args: process.argv.slice(2),
-  jsonDir: __dirname + "/config",
-})
+export async function ls({ run }) {
+  await run("ls", ["/"])
+}
 ```
 
-Example JSON file:
+See the [commandland docs](https://github.com/winton/commandland#execution-options) for available options.
+
+## JSON store
+
+Create a directory with some JSON files:
 
 ```json
 {
@@ -91,6 +90,17 @@ Example JSON file:
     }
   }
 }
+```
+
+Provide the directory path via `jsonDir`:
+
+```js
+#!/usr/bin/env node
+
+require("task-env")({
+  args: process.argv.slice(2),
+  jsonDir: __dirname + "/config",
+})
 ```
 
 Get and set JSON using property locator strings:

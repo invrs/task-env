@@ -26,6 +26,24 @@ test("task w/ aliased args", async () => {
   })
 })
 
+test("task w/ run", async () => {
+  expect.assertions(2)
+  await taskEnv({
+    args: ["task"],
+    tasks: [
+      {
+        task: async ({ run }) => {
+          let { out, code } = await run("echo", ["hello"], {
+            silent: true,
+          })
+          expect(out).toMatch(/hello/)
+          expect(code).toBe(0)
+        },
+      },
+    ],
+  })
+})
+
 test("task w/ setup", async () => {
   expect.assertions(3)
   await taskEnv({
