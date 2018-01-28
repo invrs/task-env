@@ -70,7 +70,7 @@ require("task-env")({
 
 ## JSON store
 
-Given a directory of JSON files:
+Specify a directory of JSON files:
 
 ```js
 #!/usr/bin/env node
@@ -96,9 +96,9 @@ And a JSON file:
 Get and set JSON using property locator strings:
 
 ```js
-export function user({ name, key, get, set }) {
+export async function user({ name, key, get, set }) {
   if (key) {
-    set(`users.${name}.key`, key)
+    await set(`users.${name}.key`, key)
   }
 
   console.log(">", get(`users.${name}`))
@@ -114,11 +114,11 @@ Update the key via CLI:
 
 ## All options
 
-| Option     | Example                     | Purpose                                                                              |
-| ---------- | --------------------------- | ------------------------------------------------------------------------------------ |
-| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                                |
-| conditions | `["staging", "production"]` | [structured-json conditions](hhttps://github.com/invrs/structured-json#conditionals) |
-| jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                            |
-| setup      | `[({})=>{}]`                | Setup functions                                                                      |
-| teardown   | `[({})=>{}]`                | Teardown functions                                                                   |
-| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                       |
+| Option     | Example                     | Purpose                                                                             |
+| ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
+| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
+| conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
+| jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                           |
+| setup      | `[({})=>{}]`                | Setup functions                                                                     |
+| teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
+| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
