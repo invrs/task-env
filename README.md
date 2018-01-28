@@ -2,13 +2,13 @@
 
 A framework for building reusable JS tasks.
 
-| Feature                         | Components                                                                                                             |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Parse CLI arguments             | [mri](https://github.com/lukeed/mri#readme)                                                                            |
-| Execute commands                | [commandland](https://github.com/winton/commandland))                                                                  |
-| Readable JSON store             | [Structured JSON](https://github.com/invrs/structured-json#readme)                                                     |
-| Immutable JSON store            | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
-| Atomic and Resilient JSON store | [steno](https://github.com/typicode/steno#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
+| Feature              | Components                                                                                                             |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Parse CLI arguments  | [mri](https://github.com/lukeed/mri#readme)                                                                            |
+| Execute commands     | [commandland](https://github.com/winton/commandland)                                                                   |
+| Readable JSON store  | [Structured JSON](https://github.com/invrs/structured-json#readme)                                                     |
+| Immutable JSON store | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
+| Resilient JSON store | [steno](https://github.com/typicode/steno#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
 
 ## Install
 
