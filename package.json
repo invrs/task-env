@@ -57,7 +57,9 @@
   "dependencies": {
     "camel-dot-prop-immutable": "^1.1.0",
     "commandland": "0.0.8",
+    "graceful-fs": "^4.1.11",
     "mri": "^1.1.0",
+    "steno": "^0.4.4",
     "structured-json": "^2.2.0"
   }
 }

@@ -5,7 +5,9 @@ module.exports = {
   externals: [
     "camel-dot-prop-immutable",
     "commandland",
+    "graceful-fs",
     "mri",
+    "steno",
     "structured-json",
   ],
   module: {
