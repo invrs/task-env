@@ -97,7 +97,7 @@ export function say({ text }) {
 }
 ```
 
-Calling tasks via the `tasks` argument automatically binds CLI arguments and helper functions.
+Why call `tasks.say` instead of `say` directly? Calling through `tasks` binds the CLI arguments and helper functions, as if it were called via CLI.
 
 ## Execute commands
 
