@@ -97,7 +97,7 @@ export function say({ text }) {
 }
 ```
 
-Why call `tasks.say` instead of `say` directly? Calling through `tasks` binds the CLI arguments and helper functions, as if it were called via CLI.
+Calling through `tasks` binds the CLI arguments and helper functions, as if the task were called via CLI.
 
 ## Execute commands
 
@@ -123,7 +123,7 @@ Create a directory with some JSON files:
 }
 ```
 
-Provide the directory path via `jsonDir`:
+Add the directory path to the executable via `jsonDir`:
 
 ```js
 #!/usr/bin/env node
@@ -131,10 +131,11 @@ Provide the directory path via `jsonDir`:
 require("task-env")({
   args: process.argv.slice(2),
   jsonDir: __dirname + "/config",
+  tasks: [require("./tasks/user")],
 })
 ```
 
-Get and set JSON using property locator strings:
+Within your task, get and set JSON using property strings:
 
 ```js
 export async function user({ name, key, get, set }) {
@@ -146,7 +147,7 @@ export async function user({ name, key, get, set }) {
 }
 ```
 
-Update the key via CLI:
+Run via CLI:
 
 ```bash
 ./run user --name=bob --key=~/.ssh/id_rsa
