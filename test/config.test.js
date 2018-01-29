@@ -59,41 +59,18 @@ test("load w/ conditions", async () => {
 
 test("write", async () => {
   let fixtures = await readFixtures()
-  let { json, jsonMap } = fixtures
-
-  json.buzz.written = true
 
   let buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: {} })
 
   await write({
-    json,
-    jsonDir,
-    jsonMap,
+    path: `${jsonDir}/buzz.json`,
     props: "buzz.written",
+    value: true,
   })
 
   buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: { written: true } })
-
-  writeFixtures(fixtures)
-})
-
-test("write non-existent key", async () => {
-  let fixtures = await readFixtures()
-  let { json, jsonMap } = fixtures
-
-  json.abc = {}
-
-  await write({
-    json,
-    jsonDir,
-    jsonMap,
-    props: "abc",
-  })
-
-  let newJson = await readFixture("new")
-  expect(newJson).toEqual({ abc: {} })
 
   writeFixtures(fixtures)
 })
@@ -124,6 +101,26 @@ test("setter", async () => {
 
   let buzz = await readFixture("buzz")
   expect(buzz).toEqual({ buzz: { written: true } })
+
+  writeFixtures(fixtures)
+})
+
+test("setter (new key)", async () => {
+  let config = {}
+  let fixtures = await readFixtures()
+  let { json, jsonMap } = fixtures
+
+  let set = setter({
+    config,
+    json,
+    jsonDir,
+    jsonMap,
+  })
+
+  await set("hello.written", true, "set", "hello.json")
+
+  let hello = await readFixture("hello")
+  expect(hello).toEqual({ hello: { written: true } })
 
   writeFixtures(fixtures)
 })

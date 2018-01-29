@@ -40,6 +40,8 @@ export async function writeFixtures({
       fixtureJson[basename]
     )
   }
-  let newJson = resolve(jsonDir, "new.json")
-  promisify(unlink)(newJson).catch(() => {})
+  for (let basename of ["new", "hello"]) {
+    let path = resolve(jsonDir, `${basename}.json`)
+    promisify(unlink)(path).catch(() => {})
+  }
 }
