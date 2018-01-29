@@ -1,6 +1,6 @@
 {
   "name": "task-env",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description":
     "A framework for building reusable JS tasks",
   "main": "dist/index.js",
