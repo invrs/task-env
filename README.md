@@ -85,6 +85,18 @@ export async function happy({ ask }) {
 
 See the [Inquirer.js `prompt` docs](https://github.com/SBoudrias/Inquirer.js#methods) for available options.
 
+## Call other tasks
+
+```js
+export function sayHello({ tasks }) {
+  tasks.say({ text: "hello" })
+}
+
+export function say({ text }) {}
+```
+
+Calling tasks via the `tasks` argument automatically binds CLI arguments and helper functions.
+
 ## Execute commands
 
 ```js

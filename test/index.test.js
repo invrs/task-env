@@ -26,6 +26,24 @@ test("task w/ aliased args", async () => {
   })
 })
 
+test("task calls task", async () => {
+  expect.assertions(2)
+  await taskEnv({
+    args: ["task", "-h"],
+    tasks: [
+      {
+        task: ({ h, tasks: { task2 } }) => {
+          expect(h).toBe(true)
+          task2()
+        },
+        task2({ h }) {
+          expect(h).toBe(true)
+        },
+      },
+    ],
+  })
+})
+
 test("task w/ run", async () => {
   expect.assertions(2)
   await taskEnv({
