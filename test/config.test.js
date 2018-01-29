@@ -127,3 +127,28 @@ test("setter", async () => {
 
   writeFixtures(fixtures)
 })
+
+test("setter (resilient)", async () => {
+  let config = {}
+  let fixtures = await readFixtures()
+  let { json, jsonMap } = fixtures
+
+  let set = setter({
+    config,
+    json,
+    jsonDir,
+    jsonMap,
+  })
+
+  await Promise.all([
+    set("buzz.written", true),
+    set("buzz.written2", true),
+  ])
+
+  let buzz = await readFixture("buzz")
+  expect(buzz).toEqual({
+    buzz: { written: true, written2: true },
+  })
+
+  writeFixtures(fixtures)
+})

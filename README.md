@@ -2,14 +2,14 @@
 
 A framework for building reusable JS tasks.
 
-| Feature                                 | Built With                                                                                                             |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [Parse CLI arguments](#write-some-code) | [mri](https://github.com/lukeed/mri#readme)                                                                            |
-| [Interact with the CLI](#interact)      | [Inquirer.js](https://github.com/SBoudrias/Inquirer.js#readme)                                                         |
-| [Execute commands](#execute-commands)   | [commandland](https://github.com/winton/commandland#readme)                                                            |
-| Readable [JSON store](#json-store)      | [structured-json](https://github.com/invrs/structured-json#readme)                                                     |
-| Immutable [JSON store](#json-store)     | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
-| Resilient [JSON store](#json-store)     | [steno](https://github.com/typicode/steno#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
+| Feature                                 | Built With                                                                                                                                        |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Parse CLI arguments](#write-some-code) | [mri](https://github.com/lukeed/mri#readme)                                                                                                       |
+| [Interact with the CLI](#interact)      | [Inquirer.js](https://github.com/SBoudrias/Inquirer.js#readme)                                                                                    |
+| [Execute commands](#execute-commands)   | [commandland](https://github.com/winton/commandland#readme)                                                                                       |
+| Readable [JSON store](#json-store)      | [structured-json](https://github.com/invrs/structured-json#readme)                                                                                |
+| Immutable [JSON store](#json-store)     | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                                              |
+| Resilient [JSON store](#json-store)     | [proper-lockfile](https://github.com/moxystudio/node-proper-lockfile#readme) and [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) |
 
 ## Install
 

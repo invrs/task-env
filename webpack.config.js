@@ -7,8 +7,8 @@ module.exports = {
     "commandland",
     "graceful-fs",
     "inquirer",
+    "proper-lockfile",
     "mri",
-    "steno",
     "structured-json",
   ],
   module: {
