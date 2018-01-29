@@ -83,7 +83,7 @@ export async function happy({ ask }) {
 }
 ```
 
-See the [Inquirer.js prompt docs](https://github.com/SBoudrias/Inquirer.js#methods).
+See the [Inquirer.js `prompt` docs](https://github.com/SBoudrias/Inquirer.js#methods) for available options.
 
 ## Execute commands
 
