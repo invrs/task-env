@@ -5,6 +5,7 @@ A framework for building reusable JS tasks.
 | Feature                                 | Built With                                                                                                             |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [Parse CLI arguments](#write-some-code) | [mri](https://github.com/lukeed/mri#readme)                                                                            |
+| [Interact with the CLI](#interact)      | [Inquirer.js](https://github.com/SBoudrias/Inquirer.js#readme)                                                         |
 | [Execute commands](#execute-commands)   | [commandland](https://github.com/winton/commandland#readme)                                                            |
 | Readable [JSON store](#json-store)      | [structured-json](https://github.com/invrs/structured-json#readme)                                                     |
 | Immutable [JSON store](#json-store)     | [camel-dot-prop-immutable](https://github.com/invrs/camel-dot-prop-immutable#readme)                                   |
@@ -67,6 +68,22 @@ require("task-env")({
   tasks: [require("./say-hello")],
 })
 ```
+
+## Interact
+
+```js
+export async function happy({ ask }) {
+  let { happy } = await ask([
+    {
+      type: "confirm",
+      name: "happy",
+      message: "Are you happy?",
+    },
+  ])
+}
+```
+
+See the [Inquirer.js prompt docs](https://github.com/SBoudrias/Inquirer.js#methods).
 
 ## Execute commands
 
