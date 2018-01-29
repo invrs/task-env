@@ -6,6 +6,7 @@ module.exports = {
     "camel-dot-prop-immutable",
     "commandland",
     "graceful-fs",
+    "inquirer",
     "mri",
     "steno",
     "structured-json",
