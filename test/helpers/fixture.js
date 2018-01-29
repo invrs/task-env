@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "fs"
+import { readFile, unlink, writeFile } from "fs"
 import { resolve } from "path"
 import { promisify } from "util"
 
@@ -40,4 +40,6 @@ export async function writeFixtures({
       fixtureJson[basename]
     )
   }
+  let newJson = resolve(jsonDir, "new.json")
+  promisify(unlink)(newJson).catch(() => {})
 }

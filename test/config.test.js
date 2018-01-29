@@ -79,6 +79,25 @@ test("write", async () => {
   writeFixtures(fixtures)
 })
 
+test("write non-existent key", async () => {
+  let fixtures = await readFixtures()
+  let { json, jsonMap } = fixtures
+
+  json.abc = {}
+
+  await write({
+    json,
+    jsonDir,
+    jsonMap,
+    props: "abc",
+  })
+
+  let newJson = await readFixture("new")
+  expect(newJson).toEqual({ abc: {} })
+
+  writeFixtures(fixtures)
+})
+
 test("getter", () => {
   let config = {
     default: {

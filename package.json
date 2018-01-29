@@ -6,9 +6,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
+    "fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
-    "start":
-      "eslint --ignore-path .gitignore --fix --ext=js .",
+    "pretty": "prettier --write **/*.css **/*.json **/*.md",
+    "lint": "eslint --ignore-path .gitignore --ext=js .",
     "test": "jest test"
   },
   "husky": {
