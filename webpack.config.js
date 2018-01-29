@@ -30,8 +30,10 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    libraryTarget: "commonjs",
+    library: "task-env",
+    libraryTarget: "umd",
     path: path.join(__dirname, "dist"),
+    umdNamedDefine: true,
   },
   target: "node",
 }
