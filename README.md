@@ -92,7 +92,9 @@ export function sayHello({ tasks }) {
   tasks.say({ text: "hello" })
 }
 
-export function say({ text }) {}
+export function say({ text }) {
+  console.log(">", text)
+}
 ```
 
 Calling tasks via the `tasks` argument automatically binds CLI arguments and helper functions.
