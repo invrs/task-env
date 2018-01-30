@@ -81,7 +81,7 @@ test("getter", () => {
       fizzBang: { buzz: true },
     },
   }
-  let get = getter(config)
+  let get = getter({ config, jsonDir })
   expect(get("fizz.bang.buzz")).toBe(true)
 })
 
