@@ -1,16 +1,18 @@
-import { getter, setter, load, write } from "../lib/config"
 import {
-  jsonDir,
-  readFixture,
-  readFixtures,
-  writeFixtures,
-} from "./helpers/fixture"
+  dirToJson,
+  getter,
+  setter,
+  load,
+  write,
+} from "../lib/config"
+import { fixtures } from "fxtr"
 
 test("load", async () => {
   let config = {}
+  let { path } = await fixtures(__dirname, "fixtures")
   let { json, jsonMap } = await load({
     config,
-    jsonDir,
+    jsonDir: path,
   })
   expect(config).toEqual({
     default: { bang: {}, buzz: {}, fizz: {} },
@@ -30,10 +32,11 @@ test("load", async () => {
 
 test("load w/ conditions", async () => {
   let config = {}
+  let { path } = await fixtures(__dirname, "fixtures")
   let { json, jsonMap } = await load({
     conditions: ["condition"],
     config,
-    jsonDir,
+    jsonDir: path,
   })
   expect(config).toEqual({
     condition: {
@@ -58,82 +61,77 @@ test("load w/ conditions", async () => {
 })
 
 test("write", async () => {
-  let fixtures = await readFixtures()
+  let { path, read } = await fixtures(__dirname, "fixtures")
 
-  let buzz = await readFixture("buzz")
+  let buzz = await read("buzz.json")
   expect(buzz).toEqual({ buzz: {} })
 
   await write({
-    path: `${jsonDir}/buzz.json`,
+    path: `${path}/buzz.json`,
     props: "buzz.written",
     value: true,
   })
 
-  buzz = await readFixture("buzz")
+  buzz = await read("buzz.json")
   expect(buzz).toEqual({ buzz: { written: true } })
-
-  writeFixtures(fixtures)
 })
 
-test("getter", () => {
+test("getter", async () => {
+  let { path } = await fixtures(__dirname, "fixtures")
   let config = {
     default: {
       fizzBang: { buzz: true },
     },
   }
-  let get = getter({ config, jsonDir })
+  let get = getter({ config, jsonDir: path })
   expect(get("fizz.bang.buzz")).toBe(true)
 })
 
 test("setter", async () => {
   let config = {}
-  let fixtures = await readFixtures()
-  let { json, jsonMap } = fixtures
+  let { path, read } = await fixtures(__dirname, "fixtures")
+  let { json, jsonMap } = dirToJson(path)
 
   let set = setter({
     config,
     json,
-    jsonDir,
+    jsonDir: path,
     jsonMap,
   })
 
   await set("buzz.written", true)
 
-  let buzz = await readFixture("buzz")
+  let buzz = await read("buzz.json")
   expect(buzz).toEqual({ buzz: { written: true } })
-
-  writeFixtures(fixtures)
 })
 
 test("setter (new key)", async () => {
   let config = {}
-  let fixtures = await readFixtures()
-  let { json, jsonMap } = fixtures
+  let { path, read } = await fixtures(__dirname, "fixtures")
+  let { json, jsonMap } = dirToJson(path)
 
   let set = setter({
     config,
     json,
-    jsonDir,
+    jsonDir: path,
     jsonMap,
   })
 
   await set("helloWorld.written", true)
 
-  let hello = await readFixture("hello.world")
+  let hello = await read("hello.world.json")
   expect(hello).toEqual({ helloWorld: { written: true } })
-
-  writeFixtures(fixtures)
 })
 
 test("setter (resilient)", async () => {
   let config = {}
-  let fixtures = await readFixtures()
-  let { json, jsonMap } = fixtures
+  let { path, read } = await fixtures(__dirname, "fixtures")
+  let { json, jsonMap } = dirToJson(path)
 
   let set = setter({
     config,
     json,
-    jsonDir,
+    jsonDir: path,
     jsonMap,
   })
 
@@ -142,10 +140,8 @@ test("setter (resilient)", async () => {
     set("buzz.written2", true),
   ])
 
-  let buzz = await readFixture("buzz")
+  let buzz = await read("buzz.json")
   expect(buzz).toEqual({
     buzz: { written: true, written2: true },
   })
-
-  writeFixtures(fixtures)
 })

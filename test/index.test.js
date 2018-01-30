@@ -1,9 +1,5 @@
 import taskEnv from "../lib"
-import {
-  jsonDir,
-  readFixtures,
-  writeFixtures,
-} from "./helpers/fixture"
+import { fixtures } from "fxtr"
 
 test("without parameters", () => {
   expect.assertions(1)
@@ -84,14 +80,14 @@ test("task w/ setup", async () => {
 })
 
 test("task w/ get and set", async () => {
-  let fixtures = await readFixtures()
+  let { path } = await fixtures(__dirname, "fixtures")
 
   expect.assertions(3)
 
   await taskEnv({
     args: ["task"],
     conditions: ["condition"],
-    jsonDir,
+    jsonDir: path,
     tasks: [
       {
         task: async ({ get, set }) => {
@@ -105,6 +101,4 @@ test("task w/ get and set", async () => {
       },
     ],
   })
-
-  writeFixtures(fixtures)
 })
