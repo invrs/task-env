@@ -117,10 +117,10 @@ test("setter (new key)", async () => {
     jsonMap,
   })
 
-  await set("hello.written", true)
+  await set("helloWorld.written", true)
 
-  let hello = await readFixture("hello")
-  expect(hello).toEqual({ hello: { written: true } })
+  let hello = await readFixture("hello.world")
+  expect(hello).toEqual({ helloWorld: { written: true } })
 
   writeFixtures(fixtures)
 })
