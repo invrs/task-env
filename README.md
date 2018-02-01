@@ -31,6 +31,7 @@ chmod +x run
 
 require("task-env")({
   args: process.argv.slice(2),
+  rootDir: __dirname,
   tasks: [
     {
       sayHello: ({ hello }) => {
@@ -65,6 +66,7 @@ Require task:
 
 require("task-env")({
   args: process.argv.slice(2),
+  rootDir: __dirname,
   tasks: [require("./say-hello")],
 })
 ```
@@ -123,13 +125,14 @@ Create a directory with some JSON files:
 }
 ```
 
-Add the directory path to the executable via `jsonDir`:
+Specify a `jsonDir` option (defaults to `rootDir + "/config"`):
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
   args: process.argv.slice(2),
+  rootDir: __dirname,
   jsonDir: __dirname + "/config",
   tasks: [require("./tasks/user")],
 })
@@ -161,6 +164,7 @@ Run via CLI:
 | alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
 | conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
 | jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                           |
+| rootDir    | `__dirname`                 | Path to project root                                                                |
 | setup      | `[({})=>{}]`                | Setup functions                                                                     |
 | teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
 | tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
