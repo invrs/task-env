@@ -132,7 +132,7 @@ Specify a `json` option (defaults to `root + "/config"`):
 
 require("task-env")({
   args: process.argv.slice(2),
-  json: "./config",
+  json: "config",
   root: __dirname,
   tasks: [require("./tasks/user")],
 })
@@ -163,8 +163,8 @@ Run via CLI:
 | ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
 | alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
 | conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
-| json       | `./config`                  | Relative JSON directory path                                                        |
-| root       | `__dirname`                 | Absolute root directory path                                                        |
+| json       | `config`                    | JSON directory (relative to root) path                                              |
+| root       | `__dirname`                 | Root directory (absolute) path                                                      |
 | setup      | `[({})=>{}]`                | Setup functions                                                                     |
 | teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
 | tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
