@@ -87,7 +87,8 @@ test("task w/ get and set", async () => {
   await taskEnv({
     args: ["task"],
     conditions: ["condition"],
-    dirs: { json: ".", root: path },
+    json: ".",
+    root: path,
     tasks: [
       {
         task: async ({ get, set }) => {

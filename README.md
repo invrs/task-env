@@ -31,7 +31,7 @@ chmod +x run
 
 require("task-env")({
   args: process.argv.slice(2),
-  rootDir: __dirname,
+  root: __dirname,
   tasks: [
     {
       sayHello: ({ hello }) => {
@@ -66,7 +66,7 @@ Require task:
 
 require("task-env")({
   args: process.argv.slice(2),
-  rootDir: __dirname,
+  root: __dirname,
   tasks: [require("./say-hello")],
 })
 ```
@@ -125,15 +125,15 @@ Create a directory with some JSON files:
 }
 ```
 
-Specify a `jsonDir` option (defaults to `rootDir + "/config"`):
+Specify a `json` option (defaults to `root + "/config"`):
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
   args: process.argv.slice(2),
-  rootDir: __dirname,
-  jsonDir: __dirname + "/config",
+  json: "./config",
+  root: __dirname,
   tasks: [require("./tasks/user")],
 })
 ```
@@ -159,11 +159,12 @@ Run via CLI:
 
 ## All options
 
-| Option     | Example                                 | Purpose                                                                             |
-| ---------- | --------------------------------------- | ----------------------------------------------------------------------------------- |
-| alias      | `{h: ["help"]}`                         | CLI arguments aliases                                                               |
-| conditions | `["staging", "production"]`             | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
-| dirs       | `{ root: __dirname, json: "./config" }` | Absolute root directory and relative JSON directory                                 |
-| setup      | `[({})=>{}]`                            | Setup functions                                                                     |
-| teardown   | `[({})=>{}]`                            | Teardown functions                                                                  |
-| tasks      | `[{ task: ({})=>{} }]`                  | Task functions                                                                      |
+| Option     | Example                     | Purpose                                                                             |
+| ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
+| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
+| conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
+| json       | `./config`                  | Relative JSON directory path                                                        |
+| root       | `__dirname`                 | Absolute root directory path                                                        |
+| setup      | `[({})=>{}]`                | Setup functions                                                                     |
+| teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
+| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
