@@ -159,12 +159,11 @@ Run via CLI:
 
 ## All options
 
-| Option     | Example                     | Purpose                                                                             |
-| ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
-| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
-| conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
-| jsonDir    | `__dirname + "/config"`     | Path to directory of JSON                                                           |
-| rootDir    | `__dirname`                 | Path to project root                                                                |
-| setup      | `[({})=>{}]`                | Setup functions                                                                     |
-| teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
-| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
+| Option     | Example                                 | Purpose                                                                             |
+| ---------- | --------------------------------------- | ----------------------------------------------------------------------------------- |
+| alias      | `{h: ["help"]}`                         | CLI arguments aliases                                                               |
+| conditions | `["staging", "production"]`             | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
+| dirs       | `{ root: __dirname, json: "./config" }` | Absolute root directory and relative JSON directory                                 |
+| setup      | `[({})=>{}]`                            | Setup functions                                                                     |
+| teardown   | `[({})=>{}]`                            | Teardown functions                                                                  |
+| tasks      | `[{ task: ({})=>{} }]`                  | Task functions                                                                      |
