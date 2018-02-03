@@ -163,7 +163,7 @@ Run via CLI:
 | ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
 | alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
 | conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
-| json       | `config`                    | JSON directory (relative to root) path                                              |
+| json       | `"config"`                  | JSON directory (relative to root) path                                              |
 | root       | `__dirname`                 | Root directory (absolute) path                                                      |
 | setup      | `[({})=>{}]`                | Setup functions                                                                     |
 | teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
