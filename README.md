@@ -164,6 +164,6 @@ Run via CLI:
 | alias    | `{h: ["help"]}`        | CLI arguments aliases                        |
 | config   | `"config"`             | JSON and text config path (relative to root) |
 | root     | `__dirname`            | Root directory path (absolute)               |
-| setup    | `[({})=>{}]`           | Setup functions                              |
-| teardown | `[({})=>{}]`           | Teardown functions                           |
+| setup    | `[args=>args]`         | Setup functions                              |
+| teardown | `[args=>{}]`           | Teardown functions                           |
 | tasks    | `[{ task: ({})=>{} }]` | Task functions                               |
