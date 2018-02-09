@@ -5,9 +5,10 @@
     "A framework for building reusable JS tasks",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "babel lib --out-dir dist",
     "fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
+    "pretest": "npm run build",
     "pretty": "prettier --write **/*.css **/*.json **/*.md",
     "lint": "eslint --ignore-path .gitignore --ext=js .",
     "test": "jest test"
@@ -18,7 +19,7 @@
     }
   },
   "lint-staged": {
-    "*.{json,css,md}": ["prettier --write", "git add"],
+    "*.{css,json,md}": ["prettier --write", "git add"],
     "*.js": [
       "eslint --ignore-path .gitignore --fix",
       "git add"
@@ -41,28 +42,76 @@
   },
   "homepage": "https://github.com/invrs/task-env#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-node6": "^11.0.0",
-    "eslint": "^4.16.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.5.0",
-    "fxtr": "^1.0.0",
+    "babel-cli": "6",
+    "babel-core": "6",
+    "babel-plugin-transform-async-to-generator": "6",
+    "babel-plugin-transform-object-rest-spread": "6",
+    "babel-preset-node6": "11",
+    "eslint": "4",
+    "eslint-config-prettier": "2",
+    "eslint-plugin-prettier": "2",
     "husky": "^0.15.0-rc.3",
-    "jest": "^22.1.4",
-    "lint-staged": "^6.0.1",
-    "prettier": "^1.10.2",
-    "webpack": "^3.10.0"
+    "fxtr": "1",
+    "jest": "22",
+    "lint-staged": "6",
+    "prettier": "1"
   },
   "dependencies": {
-    "camel-dot-prop-immutable": "^1.2.0",
-    "commandland": "0.0.8",
-    "graceful-fs": "^4.1.11",
-    "inquirer": "^5.0.1",
-    "mri": "^1.1.0",
-    "proper-lockfile": "^3.0.1",
-    "structured-json": "^2.2.0"
+    "commandland": "0",
+    "dot-get-set": "1",
+    "inquirer": "5",
+    "mri": "1",
+    "structured-json": "2"
+  },
+  "babel": {
+    "presets": ["node6"],
+    "plugins": [
+      "transform-async-to-generator",
+      "transform-object-rest-spread"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      },
+      "ecmaVersion": 8,
+      "sourceType": "module"
+    },
+    "rules": {
+      "curly": "error",
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "unix"],
+      "no-console": [
+        "error",
+        {
+          "allow": ["warn", "error"]
+        }
+      ],
+      "quotes": ["error", "double"],
+      "semi": ["error", "never"],
+      "sort-keys": [
+        "error",
+        "asc",
+        {
+          "caseSensitive": true,
+          "natural": false
+        }
+      ],
+      "sort-vars": [
+        "error",
+        {
+          "ignoreCase": true
+        }
+      ]
+    }
   }
 }

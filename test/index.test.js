@@ -1,5 +1,9 @@
-import taskEnv from "../lib"
+import taskEnv from "../dist"
 import { fixtures } from "fxtr"
+
+test("default function", () => {
+  expect(taskEnv).toBeInstanceOf(Function)
+})
 
 test("without parameters", () => {
   expect.assertions(1)
@@ -82,7 +86,7 @@ test("task w/ setup", async () => {
 test("task w/ get and set", async () => {
   let { path } = await fixtures(__dirname, "fixtures")
 
-  expect.assertions(3)
+  expect.assertions(2)
 
   await taskEnv({
     args: ["task"],
@@ -91,13 +95,10 @@ test("task w/ get and set", async () => {
     root: path,
     tasks: [
       {
-        task: async ({ get, set }) => {
-          expect(get("fizz.condition", "condition")).toBe(
-            true
-          )
-          expect(get("fizz.condition")).toBe(undefined)
-          await set("buzz.written", true)
-          expect(get("buzz.written")).toBe(true)
+        task: async ({ config }) => {
+          expect(config.get("buzz.written")).toBeUndefined()
+          config = await config.set("buzz.written", true)
+          expect(config.get("buzz.written")).toBe(true)
         },
       },
     ],
