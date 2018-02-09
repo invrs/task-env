@@ -2,12 +2,12 @@
 
 A framework for building reusable JS tasks.
 
-| Feature                                         | Built With                                                     |
-| ----------------------------------------------- | -------------------------------------------------------------- |
-| [Parse CLI arguments](#write-some-code)         | [mri](https://github.com/lukeed/mri#readme)                    |
-| [Interact with the CLI](#interact)              | [Inquirer.js](https://github.com/SBoudrias/Inquirer.js#readme) |
-| [Execute commands](#execute-commands)           | [commandland](https://github.com/winton/commandland#readme)    |
-| Dot [JSON and text store](#json-and-text-store) | [dot-get-set](https://github.com/invrs/dot-get-set#readme)     |
+| Feature                                     | Built With                                                     |
+| ------------------------------------------- | -------------------------------------------------------------- |
+| [Parse CLI arguments](#write-some-code)     | [mri](https://github.com/lukeed/mri#readme)                    |
+| [Interact with the CLI](#interact)          | [Inquirer.js](https://github.com/SBoudrias/Inquirer.js#readme) |
+| [Execute commands](#execute-commands)       | [commandland](https://github.com/winton/commandland#readme)    |
+| [JSON and text store](#json-and-text-store) | [dot-get-set](https://github.com/invrs/dot-get-set#readme)     |
 
 ## Install
 
