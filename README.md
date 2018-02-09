@@ -159,12 +159,11 @@ Run via CLI:
 
 ## All options
 
-| Option     | Example                     | Purpose                                                                             |
-| ---------- | --------------------------- | ----------------------------------------------------------------------------------- |
-| alias      | `{h: ["help"]}`             | CLI arguments aliases                                                               |
-| conditions | `["staging", "production"]` | [structured-json conditions](https://github.com/invrs/structured-json#conditionals) |
-| config     | `"config"`                  | JSON and text config path (relative to root)                                        |
-| root       | `__dirname`                 | Root directory path (absolute)                                                      |
-| setup      | `[({})=>{}]`                | Setup functions                                                                     |
-| teardown   | `[({})=>{}]`                | Teardown functions                                                                  |
-| tasks      | `[{ task: ({})=>{} }]`      | Task functions                                                                      |
+| Option   | Example                | Purpose                                      |
+| -------- | ---------------------- | -------------------------------------------- |
+| alias    | `{h: ["help"]}`        | CLI arguments aliases                        |
+| config   | `"config"`             | JSON and text config path (relative to root) |
+| root     | `__dirname`            | Root directory path (absolute)               |
+| setup    | `[({})=>{}]`           | Setup functions                              |
+| teardown | `[({})=>{}]`           | Teardown functions                           |
+| tasks    | `[{ task: ({})=>{} }]` | Task functions                               |

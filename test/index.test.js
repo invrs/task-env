@@ -69,7 +69,7 @@ test("task w/ setup", async () => {
     setup: [
       args => {
         expect(args.h).toBe(true)
-        args.help = true
+        return { ...args, help: true }
       },
     ],
     tasks: [
@@ -90,7 +90,6 @@ test("task w/ get and set", async () => {
 
   await taskEnv({
     args: ["task"],
-    conditions: ["condition"],
     config: ".",
     root: path,
     tasks: [
