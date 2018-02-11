@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "commandland": "0",
-    "dot-get-set": "^1.0.1",
+    "dot-get-set": "1",
     "inquirer": "5",
     "mri": "1",
     "structured-json": "2"
