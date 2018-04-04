@@ -29,7 +29,6 @@ chmod +x run
 
 require("task-env")({
   args: process.argv.slice(2),
-  root: __dirname,
   tasks: [
     {
       sayHello: ({ hello }) => {
@@ -125,15 +124,19 @@ Create a directory with some JSON files:
 }
 ```
 
-Specify a `config` option (defaults to `root + "/config"`):
+The `stores` option allows you to define multiple named stores:
 
 ```js
 #!/usr/bin/env node
 
 require("task-env")({
   args: process.argv.slice(2),
-  config: "config",
-  root: __dirname,
+  stores: {
+    config: {
+      pattern: "**/*",
+      root: __dirname,
+    },
+  },
   tasks: [require("./tasks/user")],
 })
 ```
@@ -143,7 +146,7 @@ Within your task, get and set JSON using dot-style property strings:
 ```js
 export async function user({ config, name, key }) {
   if (key) {
-    config = await config.set(`users.${name}.key`, key)
+    await config.set(`users.${name}.key`, key)
   }
 
   console.log(">", config.get(`users.${name}`))
@@ -159,11 +162,10 @@ Run via CLI:
 
 ## All options
 
-| Option   | Example                | Purpose                                      |
-| -------- | ---------------------- | -------------------------------------------- |
-| alias    | `{h: ["help"]}`        | CLI arguments aliases                        |
-| config   | `"config"`             | JSON and text config path (relative to root) |
-| root     | `__dirname`            | Root directory path (absolute)               |
-| setup    | `[args=>args]`         | Setup functions                              |
-| teardown | `[args=>{}]`           | Teardown functions                           |
-| tasks    | `[{ task: ({})=>{} }]` | Task functions                               |
+| Option   | Example                                       | Purpose                                      |
+| -------- | --------------------------------------------- | -------------------------------------------- |
+| alias    | `{h: ["help"]}`                               | CLI arguments aliases                        |
+| setup    | `[args=>args]`                                | Setup functions                              |
+| stores   | `{store: {root: __dirname, pattern: "**/*"}}` | [Store configurations](#json-and-text-store) |
+| teardown | `[args=>{}]`                                  | Teardown functions                           |
+| tasks    | `[{ task: ({})=>{} }]`                        | Task functions                               |

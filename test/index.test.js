@@ -69,9 +69,10 @@ test("task w/ setup", async () => {
   await taskEnv({
     args: ["task", "-h"],
     setup: [
-      args => {
-        expect(args.h).toBe(true)
-        return { ...args, help: true }
+      config => {
+        expect(config.args.h).toBe(true)
+        config.args.help = true
+        return config
       },
     ],
     tasks: [
@@ -92,13 +93,47 @@ test("task w/ get and set", async () => {
 
   await taskEnv({
     args: ["task"],
-    config: ".",
-    root: path,
+    stores: {
+      config: {
+        pattern: "**/*",
+        root: path,
+      },
+    },
     tasks: [
       {
         task: async ({ config }) => {
           expect(config.get("buzz.written")).toBeUndefined()
-          config = await config.set("buzz.written", true)
+          await config.set("buzz.written", true)
+          expect(config.get("buzz.written")).toBe(true)
+        },
+      },
+    ],
+  })
+})
+
+test("task w/ store setup", async () => {
+  let { path } = await fixtures(__dirname, "fixtures")
+
+  expect.assertions(2)
+
+  await taskEnv({
+    args: ["task"],
+    setup: [
+      args => ({
+        ...args,
+        stores: {
+          config: {
+            pattern: "**/*",
+            root: path,
+          },
+        },
+      }),
+    ],
+    tasks: [
+      {
+        task: async ({ config }) => {
+          expect(config.get("buzz.written")).toBeUndefined()
+          await config.set("buzz.written", true)
           expect(config.get("buzz.written")).toBe(true)
         },
       },
