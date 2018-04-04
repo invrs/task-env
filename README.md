@@ -110,7 +110,7 @@ See the [commandland docs](https://github.com/winton/commandland#execution-optio
 
 ## JSON and text store
 
-Task env uses [dot-get-set](https://github.com/invrs/dot-get-set#readme) to provide an immutable store with atomic filesystem persistence.
+Task env uses [dot-store](https://github.com/invrs/dot-store#readme) to provide an immutable store with atomic filesystem persistence.
 
 Create a directory with some JSON files:
 
