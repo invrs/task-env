@@ -96,7 +96,6 @@
           "allow": ["warn", "error"]
         }
       ],
-      "quotes": ["error", "double"],
       "semi": ["error", "never"],
       "sort-keys": [
         "error",

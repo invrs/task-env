@@ -7,7 +7,9 @@ test("default function", () => {
 
 test("without parameters", () => {
   expect.assertions(1)
-  return expect(taskEnv()).resolves.toBe(undefined)
+  return expect(taskEnv()).rejects.toEqual(
+    new Error('task "defaultTask" not found')
+  )
 })
 
 test("task w/ aliased args", async () => {
