@@ -38,7 +38,7 @@ test("task calls task", async () => {
           expect(h).toBe(true)
           task2()
         },
-        task2({ h }) {
+        task2: ({ h }) => {
           expect(h).toBe(true)
         },
       },
@@ -70,9 +70,8 @@ test("task w/ setup", async () => {
     args: ["task", "-h"],
     setup: [
       config => {
-        expect(config.args.h).toBe(true)
-        config.args.help = true
-        return config
+        expect(config.parsedArgs.h).toBe(true)
+        config.args.push("--help")
       },
     ],
     tasks: [
