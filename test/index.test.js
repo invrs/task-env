@@ -28,6 +28,30 @@ test("task w/ aliased args", async () => {
   })
 })
 
+test("task w/ aliased args from tasks", async () => {
+  expect.assertions(4)
+  await taskEnv({
+    alias: { h: ["help"] },
+    args: ["task", "-h", "-t"],
+    tasks: [
+      {
+        setup: config => {
+          config.alias.task = {
+            t: ["test"],
+          }
+          return config
+        },
+        task: ({ h, help, t, test }) => {
+          expect(h).toBe(true)
+          expect(help).toBe(true)
+          expect(t).toBe(true)
+          expect(test).toBe(true)
+        },
+      },
+    ],
+  })
+})
+
 test("task calls task", async () => {
   expect.assertions(2)
   await taskEnv({
