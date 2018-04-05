@@ -85,6 +85,25 @@ test("task w/ setup", async () => {
   })
 })
 
+test("task w/ setup from tasks", async () => {
+  expect.assertions(3)
+  await taskEnv({
+    args: ["task", "-h"],
+    tasks: [
+      {
+        setup: (config, args) => {
+          expect(args.h).toBe(true)
+          config.args.push("--help")
+        },
+        task: ({ h, help }) => {
+          expect(h).toBe(true)
+          expect(help).toBe(true)
+        },
+      },
+    ],
+  })
+})
+
 test("task w/ get and set", async () => {
   let { path } = await fixtures(__dirname, "fixtures")
 
