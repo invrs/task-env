@@ -42,7 +42,7 @@ require("task-env")({
 ## Run your task
 
 ```bash
-./run say.hello --hello=hi
+./run sayHello --hello=hi
 > hi
 ```
 
