@@ -69,8 +69,8 @@ test("task w/ setup", async () => {
   await taskEnv({
     args: ["task", "-h"],
     setup: [
-      config => {
-        expect(config.parsedArgs.h).toBe(true)
+      (config, args) => {
+        expect(args.h).toBe(true)
         config.args.push("--help")
       },
     ],
