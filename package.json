@@ -58,10 +58,11 @@
   },
   "dependencies": {
     "commandland": "0",
-    "dot-store": "^1.0.0",
-    "dot-store-fs": "^0.1.1",
+    "dot-store": "1",
+    "dot-store-fs": "0.1",
     "inquirer": "5",
     "mri": "1",
+    "opn": "5",
     "structured-json": "2"
   },
   "babel": {

@@ -12,16 +12,33 @@ test("without parameters", () => {
   )
 })
 
-test("task w/ aliased args", async () => {
-  expect.assertions(2)
+test("task w/ help", async () => {
+  expect.assertions(1)
   await taskEnv({
-    alias: { h: ["help"] },
     args: ["task", "-h"],
     tasks: [
       {
-        task: ({ h, help }) => {
+        help: ({ h }) => {
           expect(h).toBe(true)
-          expect(help).toBe(true)
+        },
+        task: () => {
+          expect(true).toBe(false)
+        },
+      },
+    ],
+  })
+})
+
+test("task w/ aliased args", async () => {
+  expect.assertions(2)
+  await taskEnv({
+    alias: { f: ["fizz"] },
+    args: ["task", "-f"],
+    tasks: [
+      {
+        task: ({ f, fizz }) => {
+          expect(f).toBe(true)
+          expect(fizz).toBe(true)
         },
       },
     ],
@@ -31,21 +48,21 @@ test("task w/ aliased args", async () => {
 test("task w/ aliased args from tasks", async () => {
   expect.assertions(5)
   await taskEnv({
-    alias: { h: ["help"] },
-    args: ["task", "-h", "-t"],
+    alias: { f: ["fizz"] },
+    args: ["task", "-f", "-t"],
     tasks: [
       {
         setup: config => {
           config.alias.task = {
-            h: ["hello"],
+            f: ["foo"],
             t: ["test"],
           }
           return config
         },
-        task: ({ h, hello, help, t, test }) => {
-          expect(h).toBe(true)
-          expect(hello).toBe(true)
-          expect(help).toBe(true)
+        task: ({ f, fizz, foo, t, test }) => {
+          expect(f).toBe(true)
+          expect(fizz).toBe(true)
+          expect(foo).toBe(true)
           expect(t).toBe(true)
           expect(test).toBe(true)
         },
@@ -57,15 +74,15 @@ test("task w/ aliased args from tasks", async () => {
 test("task calls task", async () => {
   expect.assertions(2)
   await taskEnv({
-    args: ["task", "-h"],
+    args: ["task", "-f"],
     tasks: [
       {
-        task: ({ h, tasks: { task2 } }) => {
-          expect(h).toBe(true)
+        task: ({ f, tasks: { task2 } }) => {
+          expect(f).toBe(true)
           task2()
         },
-        task2: ({ h }) => {
-          expect(h).toBe(true)
+        task2: ({ f }) => {
+          expect(f).toBe(true)
         },
       },
     ],
@@ -93,18 +110,18 @@ test("task w/ run", async () => {
 test("task w/ setup", async () => {
   expect.assertions(3)
   await taskEnv({
-    args: ["task", "-h"],
+    args: ["task", "-f"],
     setup: [
       (config, args) => {
-        expect(args.h).toBe(true)
-        config.args.push("--help")
+        expect(args.f).toBe(true)
+        config.args.push("--foo")
       },
     ],
     tasks: [
       {
-        task: ({ h, help }) => {
-          expect(h).toBe(true)
-          expect(help).toBe(true)
+        task: ({ f, foo }) => {
+          expect(f).toBe(true)
+          expect(foo).toBe(true)
         },
       },
     ],
@@ -114,16 +131,16 @@ test("task w/ setup", async () => {
 test("task w/ setup from tasks", async () => {
   expect.assertions(3)
   await taskEnv({
-    args: ["task", "-h"],
+    args: ["task", "-f"],
     tasks: [
       {
         setup: (config, args) => {
-          expect(args.h).toBe(true)
-          config.args.push("--help")
+          expect(args.f).toBe(true)
+          config.args.push("--foo")
         },
-        task: ({ h, help }) => {
-          expect(h).toBe(true)
-          expect(help).toBe(true)
+        task: ({ f, foo }) => {
+          expect(f).toBe(true)
+          expect(foo).toBe(true)
         },
       },
     ],
