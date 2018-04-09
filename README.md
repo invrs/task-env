@@ -63,7 +63,6 @@ Require task:
 
 require("task-env")({
   args: process.argv.slice(2),
-  root: __dirname,
   tasks: [require("./say-hello")],
 })
 ```
