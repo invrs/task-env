@@ -43,24 +43,24 @@
   "homepage": "https://github.com/invrs/task-env#readme",
   "devDependencies": {
     "babel-cli": "6",
-    "babel-core": "6",
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-async-to-generator": "6",
     "babel-plugin-transform-object-rest-spread": "6",
     "babel-preset-node6": "11",
-    "eslint": "4",
+    "eslint": "^4.19.1",
     "eslint-config-prettier": "2",
     "eslint-plugin-prettier": "2",
-    "husky": "^0.15.0-rc.3",
-    "fxtr": "1",
-    "jest": "22",
-    "lint-staged": "6",
-    "prettier": "1"
+    "fxtr": "^1.2.0",
+    "husky": "^0.15.0-rc.13",
+    "jest": "^22.4.3",
+    "lint-staged": "^6.1.1",
+    "prettier": "^1.12.1"
   },
   "dependencies": {
     "commandland": "0",
-    "dot-store": "1",
+    "dot-store": "^1.1.7",
     "dot-store-fs": "0.1",
-    "inquirer": "5",
+    "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5",
     "structured-json": "2"
