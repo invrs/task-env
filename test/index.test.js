@@ -71,6 +71,27 @@ test("task w/ aliased args from tasks", async () => {
   })
 })
 
+test("task w/ overwritten args", async () => {
+  expect.assertions(2)
+  await taskEnv({
+    alias: { f: ["fizz"] },
+    args: ["task", "-f"],
+    setup: [
+      args => {
+        args.overwriteArgs = { fizz: false }
+      },
+    ],
+    tasks: [
+      {
+        task: ({ f, fizz }) => {
+          expect(f).toBe(true)
+          expect(fizz).toBe(false)
+        },
+      },
+    ],
+  })
+})
+
 test("task calls task", async () => {
   expect.assertions(2)
   await taskEnv({
