@@ -164,7 +164,8 @@ Run via CLI:
 | Option   | Example                                       | Purpose                                      |
 | -------- | --------------------------------------------- | -------------------------------------------- |
 | alias    | `{h: ["help"]}`                               | CLI arguments aliases                        |
-| setup    | `[args=>args]`                                | Setup functions                              |
+| preSetup | `[config=>config]`                            | Pre-setup functions (before argv parsing)    |
+| setup    | `[config=>config]`                            | Setup functions                              |
 | stores   | `{store: {root: __dirname, pattern: "**/*"}}` | [Store configurations](#json-and-text-store) |
 | teardown | `[args=>{}]`                                  | Teardown functions                           |
 | tasks    | `[{ task: ({})=>{} }]`                        | Task functions                               |

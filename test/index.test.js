@@ -46,18 +46,25 @@ test("task w/ aliased args", async () => {
 })
 
 test("task w/ aliased args from tasks", async () => {
-  expect.assertions(5)
+  expect.assertions(10)
   await taskEnv({
     alias: { f: ["fizz"] },
     args: ["task", "-f", "-t"],
     tasks: [
       {
-        setup: config => {
+        preSetup: config => {
           config.alias.task = {
             f: ["foo"],
             t: ["test"],
           }
-          return config
+        },
+        setup: (config, args) => {
+          const { f, fizz, foo, t, test } = args
+          expect(f).toBe(true)
+          expect(fizz).toBe(true)
+          expect(foo).toBe(true)
+          expect(t).toBe(true)
+          expect(test).toBe(true)
         },
         task: ({ f, fizz, foo, t, test }) => {
           expect(f).toBe(true)
@@ -65,27 +72,6 @@ test("task w/ aliased args from tasks", async () => {
           expect(foo).toBe(true)
           expect(t).toBe(true)
           expect(test).toBe(true)
-        },
-      },
-    ],
-  })
-})
-
-test("task w/ overwritten args", async () => {
-  expect.assertions(2)
-  await taskEnv({
-    alias: { f: ["fizz"] },
-    args: ["task", "-f"],
-    setup: [
-      args => {
-        args.overwriteArgs = { fizz: false }
-      },
-    ],
-    tasks: [
-      {
-        task: ({ f, fizz }) => {
-          expect(f).toBe(true)
-          expect(fizz).toBe(false)
         },
       },
     ],
@@ -128,11 +114,11 @@ test("task w/ run", async () => {
   })
 })
 
-test("task w/ setup", async () => {
+test("task w/ preSetup", async () => {
   expect.assertions(3)
   await taskEnv({
     args: ["task", "-f"],
-    setup: [
+    preSetup: [
       (config, args) => {
         expect(args.f).toBe(true)
         config.args.push("--foo")
@@ -149,13 +135,13 @@ test("task w/ setup", async () => {
   })
 })
 
-test("task w/ setup from tasks", async () => {
+test("task w/ preSetup from tasks", async () => {
   expect.assertions(3)
   await taskEnv({
     args: ["task", "-f"],
     tasks: [
       {
-        setup: (config, args) => {
+        preSetup: (config, args) => {
           expect(args.f).toBe(true)
           config.args.push("--foo")
         },
@@ -200,7 +186,7 @@ test("task w/ store setup", async () => {
 
   await taskEnv({
     args: ["task"],
-    setup: [
+    preSetup: [
       args => ({
         ...args,
         stores: {
