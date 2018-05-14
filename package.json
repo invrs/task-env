@@ -59,7 +59,7 @@
   "dependencies": {
     "commandland": "0",
     "dot-store": "^2.2.2",
-    "dot-store-fs": "^2.2.2",
+    "dot-store-fs": "^2.2.3",
     "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5",
