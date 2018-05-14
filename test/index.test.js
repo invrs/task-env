@@ -154,7 +154,7 @@ test("task w/ preSetup from tasks", async () => {
   })
 })
 
-test("task w/ get and set", async () => {
+test.only("task w/ get and set", async () => {
   let { path } = await fixtures(__dirname, "fixtures")
 
   expect.assertions(2)
@@ -170,9 +170,13 @@ test("task w/ get and set", async () => {
     tasks: [
       {
         task: async ({ config }) => {
-          expect(config.get("buzz.written")).toBeUndefined()
+          expect(
+            await config.get("buzz.written")
+          ).toBeUndefined()
           await config.set("buzz.written", true)
-          expect(config.get("buzz.written")).toBe(true)
+          expect(await config.get("buzz.written")).toBe(
+            true
+          )
         },
       },
     ],
@@ -200,9 +204,13 @@ test("task w/ store setup", async () => {
     tasks: [
       {
         task: async ({ config }) => {
-          expect(config.get("buzz.written")).toBeUndefined()
+          expect(
+            await config.get("buzz.written")
+          ).toBeUndefined()
           await config.set("buzz.written", true)
-          expect(config.get("buzz.written")).toBe(true)
+          expect(await config.get("buzz.written")).toBe(
+            true
+          )
         },
       },
     ],

@@ -58,8 +58,8 @@
   },
   "dependencies": {
     "commandland": "0",
-    "dot-store": "^1.1.7",
-    "dot-store-fs": "0.1",
+    "dot-store": "^2.2.2",
+    "dot-store-fs": "^2.2.2",
     "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5",
