@@ -154,7 +154,7 @@ test("task w/ preSetup from tasks", async () => {
   })
 })
 
-test.only("task w/ get and set", async () => {
+test("task w/ get and set", async () => {
   let { path } = await fixtures(__dirname, "fixtures")
 
   expect.assertions(2)
