@@ -4,13 +4,14 @@
   "description": "A framework for building reusable JS tasks",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel lib --out-dir dist",
+    "build": "rimraf dist; babel lib --out-dir dist --source-maps",
     "fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
     "pretest": "npm run build",
     "pretty": "prettier --write **/*.css **/*.json **/*.md",
     "lint": "eslint --ignore-path .gitignore --ext=js .",
-    "test": "jest test"
+    "test": "jest test",
+    "watch": "rimraf dist; babel lib --watch --out-dir dist --source-maps"
   },
   "husky": {
     "hooks": {
@@ -50,11 +51,12 @@
   },
   "homepage": "https://github.com/invrs/task-env#readme",
   "devDependencies": {
-    "babel-cli": "6",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-async-to-generator": "6",
-    "babel-plugin-transform-object-rest-spread": "6",
-    "babel-preset-node6": "11",
+    "@babel/cli": "7.0.0-beta.42",
+    "@babel/core": "7.0.0-beta.42",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.42",
+    "@babel/plugin-transform-runtime": "7.0.0-beta.42",
+    "@babel/preset-env": "7.0.0-beta.42",
+    "babel-core": "^7.0.0-bridge.0",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "2",
     "eslint-plugin-prettier": "2",
@@ -65,22 +67,44 @@
     "prettier": "^1.12.1"
   },
   "dependencies": {
+    "@babel/runtime": "7.0.0-beta.42",
     "commandland": "^0.1.3",
     "dot-store": "^2.4.7",
     "dot-store-fs": "^2.4.5",
     "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5",
-    "structured-json": "2"
+    "rimraf": "2"
   },
   "babel": {
     "presets": [
-      "node6"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "6.14"
+          }
+        }
+      ]
     ],
     "plugins": [
-      "transform-async-to-generator",
-      "transform-object-rest-spread"
-    ]
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-transform-runtime"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "targets": {
+                "node": "6.14"
+              }
+            }
+          ]
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "env": {
@@ -136,5 +160,9 @@
         }
       ]
     }
-  }
+  },
+  "starters": [
+    "babel",
+    "babel-node"
+  ]
 }
