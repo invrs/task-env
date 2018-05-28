@@ -1,8 +1,7 @@
 {
   "name": "task-env",
   "version": "2.12.1",
-  "description":
-    "A framework for building reusable JS tasks",
+  "description": "A framework for building reusable JS tasks",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel lib --out-dir dist",
@@ -19,7 +18,10 @@
     }
   },
   "lint-staged": {
-    "*.{css,json,md}": ["prettier --write", "git add"],
+    "*.{css,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
     "*.js": [
       "eslint --ignore-path .gitignore --fix",
       "git add"
@@ -34,7 +36,13 @@
     "type": "git",
     "url": "git+ssh://git@github.com/invrs/task-env.git"
   },
-  "keywords": ["task", "exec", "cli", "json", "store"],
+  "keywords": [
+    "task",
+    "exec",
+    "cli",
+    "json",
+    "store"
+  ],
   "author": "Winton Welsh <winton@cyclo.ps>",
   "license": "MIT",
   "bugs": {
@@ -58,15 +66,17 @@
   },
   "dependencies": {
     "commandland": "^0.1.3",
-    "dot-store": "^2.2.2",
-    "dot-store-fs": "^2.2.3",
+    "dot-store": "^2.4.7",
+    "dot-store-fs": "^2.4.5",
     "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5",
     "structured-json": "2"
   },
   "babel": {
-    "presets": ["node6"],
+    "presets": [
+      "node6"
+    ],
     "plugins": [
       "transform-async-to-generator",
       "transform-object-rest-spread"
@@ -90,15 +100,27 @@
     },
     "rules": {
       "curly": "error",
-      "indent": ["error", 2],
-      "linebreak-style": ["error", "unix"],
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
       "no-console": [
         "error",
         {
-          "allow": ["warn", "error"]
+          "allow": [
+            "warn",
+            "error"
+          ]
         }
       ],
-      "semi": ["error", "never"],
+      "semi": [
+        "error",
+        "never"
+      ],
       "sort-keys": [
         "error",
         "asc",
