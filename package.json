@@ -65,7 +65,8 @@
     "jest": "^22.4.3",
     "lint-staged": "^6.1.1",
     "prettier": "^1.13.0",
-    "eslint-plugin-react": "7"
+    "eslint-plugin-react": "7",
+    "rimraf": "2"
   },
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.42",
@@ -74,8 +75,7 @@
     "dot-store-fs": "^2.4.5",
     "inquirer": "^5.2.0",
     "mri": "1",
-    "opn": "5",
-    "rimraf": "2"
+    "opn": "5"
   },
   "babel": {
     "presets": [
@@ -91,21 +91,7 @@
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime"
-    ],
-    "env": {
-      "test": {
-        "presets": [
-          [
-            "@babel/preset-env",
-            {
-              "targets": {
-                "node": "6.14"
-              }
-            }
-          ]
-        ]
-      }
-    }
+    ]
   },
   "eslintConfig": {
     "env": {
@@ -189,6 +175,7 @@
     "basics",
     "babel",
     "babel-node",
+    "babel-scripts",
     "eslint",
     "husky"
   ]
