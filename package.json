@@ -66,7 +66,8 @@
     "lint-staged": "^6.1.1",
     "prettier": "^1.13.0",
     "eslint-plugin-react": "7",
-    "rimraf": "2"
+    "rimraf": "2",
+    "babel-eslint": "^8.2.3"
   },
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.42",
@@ -172,11 +173,32 @@
     "parser": "babel-eslint"
   },
   "starters": [
-    "basics",
     "babel",
     "babel-node",
     "babel-scripts",
+    "basics",
     "eslint",
-    "husky"
-  ]
+    "husky",
+    "watchman-babel"
+  ],
+  "watchman": {
+    "triggers": [
+      {
+        "name": "babel",
+        "expression": [
+          "anyof",
+          [
+            "match",
+            "lib/**/*.js",
+            "wholename"
+          ]
+        ],
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ]
+      }
+    ]
+  }
 }
