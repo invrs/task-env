@@ -72,8 +72,8 @@
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.42",
     "commandland": "^0.1.3",
-    "dot-store": "^2.4.7",
-    "dot-store-fs": "^2.4.5",
+    "dot-store": "^2.6.13",
+    "dot-store-fs": "^2.6.3",
     "inquirer": "^5.2.0",
     "mri": "1",
     "opn": "5"
