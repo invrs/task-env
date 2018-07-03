@@ -79,7 +79,7 @@ test("task w/ aliased args from tasks", async () => {
 })
 
 test("task calls task", async () => {
-  expect.assertions(2)
+  expect.assertions(3)
   await taskEnv({
     args: ["task", "-f"],
     tasks: [
@@ -88,8 +88,13 @@ test("task calls task", async () => {
           expect(f).toBe(true)
           task2()
         },
-        task2: ({ f }) => {
-          expect(f).toBe(true)
+        task2: obj => {
+          expect(obj.f).toBe(undefined)
+          expect(obj).toEqual({
+            ask: expect.any(Function),
+            run: expect.any(Function),
+            tasks: expect.any(Object),
+          })
         },
       },
     ],

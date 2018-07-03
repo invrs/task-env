@@ -160,10 +160,6 @@
           "ignoreStrings": true
         }
       ],
-      "quotes": [
-        "error",
-        "double"
-      ],
       "react/display-name": "off",
       "react/no-find-dom-node": "off",
       "react/prop-types": "off",
